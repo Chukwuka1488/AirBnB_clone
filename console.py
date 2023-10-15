@@ -3,6 +3,12 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -84,6 +90,21 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
+
+    def default(self, line):
+        """Method called on an unrecognized command."""
+        args = line.split(".")
+        if len(args) == 2:
+            class_name, method_name = args[0], args[1]
+            if method_name == "all()":
+                if class_name in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+                    self.do_all(class_name)
+                else:
+                    print("** class doesn't exist **")
+            else:
+                print("*** Unknown syntax: {}".format(line))
+        else:
+            print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, args):
         """Quit command to exit the program"""
