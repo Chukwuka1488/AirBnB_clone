@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+"""Creating base model class"""
 import uuid
 from datetime import datetime
+
 
 class BaseModel:
     """ Base model class with public instance attributes and methods """
