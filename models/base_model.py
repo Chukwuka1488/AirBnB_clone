@@ -23,6 +23,9 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            # Lazy import
+            from models import storage
+            storage.new(self)
 
     def __str__(self):
         """ String representation of BaseModel instance """
@@ -31,6 +34,10 @@ class BaseModel:
     def save(self):
         """ Updates updated_at with current datetime """
         self.updated_at = datetime.now()
+        # Lazy import
+        from models import storage
+        storage.new(self)
+        storage.save()
 
     def to_dict(self):
         """ Returns a dictionary representation of BaseModel """
@@ -39,3 +46,4 @@ class BaseModel:
         base_model_dict["created_at"] = self.created_at.isoformat()
         base_model_dict["updated_at"] = self.updated_at.isoformat()
         return base_model_dict
+
