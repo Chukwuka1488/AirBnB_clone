@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Creates a new instance of BaseModel"""
         args_list = arg.split()
-        if not args_list:
+        if not args:
             print("** class name missing **")
         elif args_list[0] not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """Prints the string representation of an instance"""
         args_list = args.split()
-        if not args_list:
+        if not args:
             print("** class name missing **")
         elif args_list[0] not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
         args_list = args.split()
-        if not args_list:
+        if not args:
             print("** class name missing **")
         elif args_list[0] not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """Prints all string representation of all instances"""
         args_list = args.split()
-        if not args_list:
+        if not args:
             print([str(value) for value in storage.all().values()])
         elif args_list[0] not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         """Updates an instance based on the class name and id"""
         args_list = args.split()
-        if not args_list:
+        if not args:
             print("** class name missing **")
         elif args_list[0] not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
