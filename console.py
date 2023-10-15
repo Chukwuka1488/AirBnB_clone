@@ -96,15 +96,29 @@ class HBNBCommand(cmd.Cmd):
         args = line.split(".")
         if len(args) == 2:
             class_name, method_name = args[0], args[1]
+
             if method_name == "all()":
                 if class_name in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
                     self.do_all(class_name)
                 else:
                     print("** class doesn't exist **")
+
+            elif method_name == "count()":
+                if class_name in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+                    self.do_count(class_name)
+                else:
+                    print("** class doesn't exist **")
+
             else:
                 print("*** Unknown syntax: {}".format(line))
+
         else:
             print("*** Unknown syntax: {}".format(line))
+
+    def do_count(self, class_name):
+        """Counts the number of instances of a specified class."""
+        count = sum(1 for key in storage.all().keys() if class_name in key)
+        print(count)
 
     def do_quit(self, args):
         """Quit command to exit the program"""
