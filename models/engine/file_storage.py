@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+"""Creating File Storage"""
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -34,6 +36,8 @@ class FileStorage:
                 if cls_name == "BaseModel":
                     FileStorage.__objects[key] = BaseModel(**value)
                 # Extend this for other classes as needed
+                elif cls_name == "User":
+                    FileStorage.__objects[key] = User(**value)
         except FileNotFoundError:
             pass
 
