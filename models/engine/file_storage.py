@@ -1,17 +1,21 @@
 #!/usr/bin/python3
+"""Creating File Storage"""
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
     """Serializes and deserializes instances to/from a JSON file"""
-    
+
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
-        """Returns the dictionary of objects"""
-        return FileStorage.__objects
+    def all(self, cls=None):
+        """Returns the dictionary with objects"""
+        if cls:
+            return {k: v for k, v in self.__objects.items() if isinstance(v, cls)}
+        return self.__objects
 
     def new(self, obj):
         """Sets objects with a new object"""
@@ -34,6 +38,8 @@ class FileStorage:
                 if cls_name == "BaseModel":
                     FileStorage.__objects[key] = BaseModel(**value)
                 # Extend this for other classes as needed
+                elif cls_name == "User":
+                    FileStorage.__objects[key] = User(**value)
         except FileNotFoundError:
             pass
 
